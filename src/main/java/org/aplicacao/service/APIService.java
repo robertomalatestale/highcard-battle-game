@@ -37,4 +37,15 @@ public class APIService {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         return gson.fromJson(response.body(), DtoDeckResponse.class);
     }
+    //Method to check remaining cards in deck
+    public int checkRemainingCards(String deckId) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI("https://deckofcardsapi.com/api/deck/" + deckId + "/draw/?count=0"))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        DtoDeckResponse deckResponse = gson.fromJson(response.body(), DtoDeckResponse.class);
+        return deckResponse.getRemaining();
+    }
 }
