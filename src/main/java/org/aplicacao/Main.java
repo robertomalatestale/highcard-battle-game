@@ -6,13 +6,21 @@ import org.aplicacao.service.APIService;
 
 public class Main {
     public static void main(String[] args){
+        DeckOfCards deck = new DeckOfCards();
+        Player player1 = new Player("Roberto");
+        Player player2 = new Player("Davi");
+        Player player3 = new Player("Allan");
         try{
-            APIService api = new APIService();
-            String deckId = api.createDeck();
-            System.out.println("Deck created with the ID: " + deckId);
-            System.out.println("Let's draw 5 cards");
-            DtoDeckResponse response = api.fulfillPlayerHand(deckId);
-            response.getCards().forEach(System.out::println);
+            String deckId = deck.createDeckId();
+            player1.fulfillHand(deckId);
+            System.out.println(player1.getHand());
+            System.out.println(deck.checkRemainingCards(deckId));
+            player2.fulfillHand(deckId);
+            System.out.println(player2.getHand());
+            System.out.println(deck.checkRemainingCards(deckId));
+            player3.fulfillHand(deckId);
+            System.out.println(player3.getHand());
+            System.out.println(deck.checkRemainingCards(deckId));
         } catch (Exception e) {
             e.printStackTrace();
         }
