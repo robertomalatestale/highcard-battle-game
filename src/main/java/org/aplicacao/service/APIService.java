@@ -27,16 +27,17 @@ public class APIService {
 
         return deckResponse.getDeck_id();
     }
-    //Fulfilling the hand of the player with 5 cards coming from the created deck
-    public DtoDeckResponse fulfillPlayerHand (String deckId) throws Exception {
+    //Method to draw the quantity of cards wanted
+    public DtoDeckResponse drawCards (String deckId, int quantity) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("https://deckofcardsapi.com/api/deck/" + deckId + "/draw/?count=5"))
+                .uri(new URI("https://deckofcardsapi.com/api/deck/" + deckId + "/draw/?count=" + quantity))
                 .GET()
                 .build();
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         return gson.fromJson(response.body(), DtoDeckResponse.class);
     }
+
     //Method to check remaining cards in deck
     public int checkRemainingCards(String deckId) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
