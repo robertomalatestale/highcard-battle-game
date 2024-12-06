@@ -2,14 +2,11 @@ package org.aplicacao;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        DeckOfCards deck = new DeckOfCards();
+        Match match = new Match();
         Player player1 = new Player("Roberto");
-        String deckId = deck.createDeckId();
-        player1.fulfillHand(deckId,3);
-        player1.playerTurn(deckId);
-        player1.playerTurn(deckId);
-        player1.playerTurn(deckId);
+        Player player2 = new Player("Davi");
+        match.gameMatch(player1,player2);
     }
 }
 
-//TODO Começar a pensar na lógica do jogo agora, qual carta vence qual
+//TODO Put a printf to tells wich players is current move. Implements game match counter

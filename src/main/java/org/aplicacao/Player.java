@@ -25,7 +25,8 @@ public class Player extends APIService {
         hand.add(card);
     }
 
-    public void playerTurn(String deckId) throws Exception {
+    public DtoCardResponse playerTurn(String deckId) throws Exception {
+        DtoCardResponse cardPlayed = new DtoCardResponse();
         System.out.println("Choose an option! If you want to play a card choose between 1 to 3.");
         System.out.println("Or if you want to discard one card to draw another from the deck, choose option 4 (only 1 discard per match)");
         for(int i = 0; i<hand.size();i++){
@@ -45,7 +46,8 @@ public class Player extends APIService {
             playerChoice = scanner.nextInt();}
         switch(playerChoice){
             case 1, 2, 3:
-                System.out.println("\n" + this.name + " played the card: " + hand.get(playerChoice-1 ) + "\n");
+                cardPlayed = hand.get(playerChoice-1);
+                System.out.println("\n" + this.name + " played the card: " + hand.get(playerChoice-1) + "\n");
                 discardCard(hand,(playerChoice));
                 DtoCardResponse cardDrawn = new DtoCardResponse();
                 List<DtoCardResponse> oneCardDrawn = new ArrayList<>();
@@ -69,6 +71,7 @@ public class Player extends APIService {
                 System.out.println("\nDiscarded card " + hand.get(playerChoice-1) + " from your hand.\n");
                 discardCard(hand,(playerChoice));
         }
+        return cardPlayed;
     }
 
     protected void discardCard(List<DtoCardResponse> card, int index){
