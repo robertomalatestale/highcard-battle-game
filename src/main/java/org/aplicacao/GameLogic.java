@@ -21,4 +21,11 @@ public class GameLogic {
              return ("It's a draw!");
          }
     }
+    public static boolean verifyWinner (String nome, int playerMatchesWon){
+         if (playerMatchesWon>=2){
+             System.out.println("\n" + nome + " WINS THE GAME!");
+             return true;
+         }
+         return false;
+    }
 }
