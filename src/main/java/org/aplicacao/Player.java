@@ -11,7 +11,7 @@ public class Player extends APIService {
     private String name;
     private int matchesWon;
     private List<DtoCardResponse> hand = new ArrayList<>();
-    static private int discardCount = 1;
+    private int discardCount = 1;
     Scanner scanner = new Scanner(System.in);
 
     public Player(String name) {
@@ -27,6 +27,7 @@ public class Player extends APIService {
 
     public DtoCardResponse playerTurn(String deckId) throws Exception {
         DtoCardResponse cardPlayed = new DtoCardResponse();
+        System.out.println(this.name + "'s turn!\n");
         System.out.println("Choose an option! If you want to play a card choose between 1 to 3.");
         System.out.println("Or if you want to discard one card to draw another from the deck, choose option 4 (only 1 discard per match)");
         for(int i = 0; i<hand.size();i++){
