@@ -49,12 +49,7 @@ public class Player extends APIService {
             case 1, 2, 3:
                 cardPlayed = hand.get(playerChoice-1);
                 System.out.println("\n" + this.name + " played the card: " + hand.get(playerChoice-1) + "\n");
-                discardCard(hand,(playerChoice));
-                DtoCardResponse cardDrawn = new DtoCardResponse();
-                List<DtoCardResponse> oneCardDrawn = new ArrayList<>();
-                oneCardDrawn = drawCards(deckId,1).getCards();
-                cardDrawn = oneCardDrawn.getFirst();
-                addCardToHand(cardDrawn);
+                discardCardAndDrawOne(hand,(playerChoice),deckId);
                 break;
             case 4:
                 discardCount -= 1;
@@ -70,13 +65,19 @@ public class Player extends APIService {
                     playerChoice = scanner.nextInt();
                 }
                 System.out.println("\nDiscarded card " + hand.get(playerChoice-1) + " from your hand.\n");
-                discardCard(hand,(playerChoice));
+                discardCardAndDrawOne(hand,(playerChoice),deckId);
+                break;
         }
         return cardPlayed;
     }
 
-    protected void discardCard(List<DtoCardResponse> card, int index){
+    protected void discardCardAndDrawOne(List<DtoCardResponse> card, int index, String deckId) throws Exception {
         card.remove((index-1));
+        DtoCardResponse cardDrawn = new DtoCardResponse();
+        List<DtoCardResponse> oneCardDrawn = new ArrayList<>();
+        oneCardDrawn = drawCards(deckId,1).getCards();
+        cardDrawn = oneCardDrawn.getFirst();
+        addCardToHand(cardDrawn);
     }
 
     public String getName() {
