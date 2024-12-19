@@ -8,5 +8,3 @@ public class Main {
         match.fullGame(player1,player2);
     }
 }
-
-//TODO Need to correct a bug with discard mechanic

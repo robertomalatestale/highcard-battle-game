@@ -66,6 +66,18 @@ public class Player extends APIService {
                 }
                 System.out.println("\nDiscarded card " + hand.get(playerChoice-1) + " from your hand.\n");
                 discardCardAndDrawOne(hand,(playerChoice),deckId);
+                System.out.println("Choose a card to play between 1 and 3!");
+                for(int i = 0; i<hand.size();i++){
+                    System.out.println((i+1) + " - " + hand.get(i));
+                }
+                System.out.print("Enter your choice here: ");
+                playerChoice = scanner.nextInt();
+                while (playerChoice>4 || playerChoice<=0){
+                    System.out.println("Invalid value!");
+                    System.out.print("Enter your choice here: ");
+                    playerChoice = scanner.nextInt();}
+                cardPlayed = hand.get(playerChoice-1);
+                System.out.println("\n" + this.name + " played the card: " + hand.get(playerChoice-1) + "\n");
                 break;
         }
         return cardPlayed;
@@ -79,6 +91,7 @@ public class Player extends APIService {
         cardDrawn = oneCardDrawn.getFirst();
         addCardToHand(cardDrawn);
     }
+
 
     public String getName() {
         return name;
